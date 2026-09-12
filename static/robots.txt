@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ielts-books.pages.dev/sitemap.xml
+Sitemap: https://cambridge.sellvy.online/sitemap.xml

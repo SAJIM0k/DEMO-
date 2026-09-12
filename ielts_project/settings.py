@@ -22,6 +22,7 @@ if allowed_hosts_env:
 
 # CSRF Trusted Origins (essential for Railway and custom domains)
 CSRF_TRUSTED_ORIGINS = [
+    'https://cambridge.sellvy.online',
     'https://*.railway.app',
     'https://*.up.railway.app',
     'http://localhost:8000',
