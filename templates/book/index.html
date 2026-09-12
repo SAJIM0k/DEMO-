@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <meta name="robots" content="noindex">
+  <meta name="referrer" content="no-referrer">
+  <title>Online Book Reader | IELTS Books</title>
+  <meta name="google-site-verification" content="bnPsMsM4FfLMpK2qEe8wUmjeXnRwHFDWZZDwOj8wlx4" />
+  <style>
+    :root, html { color-scheme: light; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: system-ui, sans-serif; color: #0f172a; background: #f8fafc; }
+    header { min-height: 56px; padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px; border-bottom: 1px solid #e2e8f0; }
+    a { color: #0369a1; }
+    iframe { display: block; width: 100%; height: calc(100vh - 64px); height: calc(100dvh - 64px); border: 0; background: white; }
+    #message { max-width: 640px; margin: 64px auto; padding: 24px; line-height: 1.6; }
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="../">&larr; All books</a>
+    <a id="open-reader" hidden target="_blank" rel="noopener noreferrer">Open reader in a new tab</a>
+  </header>
+  <main>
+    <section id="message">
+      <h1>Select a book to start reading</h1>
+      <p>Return to <a href="../">the book library</a> and click Read Online to open a fresh link.</p>
+    </section>
+    <iframe id="reader" title="Online book reader" referrerpolicy="no-referrer" allow="fullscreen" hidden></iframe>
+  </main>
+  <noscript><p>Enable JavaScript, then select a book from the library.</p></noscript>
+  <script>
+    (() => {
+      const token = new URLSearchParams(window.location.search).get('book');
+      if (!token) return;
+
+      // Keep the local /book/ route while the existing service handles the reader
+      // and validates its short-lived token. Never regenerate expired tokens here.
+      const readerUrl = new URL('https://books.sajim-arifacademy.workers.dev/book/');
+      readerUrl.searchParams.set('book', token);
+      const reader = document.getElementById('reader');
+      const openReader = document.getElementById('open-reader');
+      reader.src = readerUrl.href;
+      reader.hidden = false;
+      openReader.href = readerUrl.href;
+      openReader.hidden = false;
+      document.getElementById('message').hidden = true;
+    })();
+  </script>
+</body>
+</html>
